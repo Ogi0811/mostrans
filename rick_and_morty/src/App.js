@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+// import "./App.css";
+// import CharacterList from "./pages/CharacterList";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Home from "./pages/Home";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import CharacterList from "./pages/CharacterList";
+import "./index.css";
+import CharacterDetail from "./pages/CharacterDetails";
+import { CharacterProvider } from "./context/CharacterContex";
+import CharactersByLocation from "./pages/CharacterByLocations";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CharacterProvider>
+      <BrowserRouter>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/character" element={<CharacterList />} />
+            <Route path="/character/:id" element={<CharacterDetail />} />
+            <Route path="/locations" element={<CharactersByLocation />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </CharacterProvider>
   );
 }
 
